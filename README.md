@@ -50,7 +50,7 @@ Now the peak starts at the first value, and the drawdown starts at 0 and can onl
 
 ### 2. Commissions in P/L and final value
 
-`Backtest.finish()` built the P/L and final value from the gross closed P/L, which leaves out commissions. Meanwhile the account value history, which Sharpe and drawdown are calculated from, did subtract commissions. Now P/L, final value and return are net of all commissions, the same as the rest of the report. On the bundled data the old calculation would have printed P/L 9,653.29 and Result 64.36%. The fixed code prints 4,932.33 and 32.88%, because 4,720.96 went to commissions.
+`Backtest.finish()` built the P/L and final value from the gross closed P/L, which leaves out commissions. Meanwhile the account value history, which Sharpe and drawdown are calculated from, did subtract commissions. Now P/L, final value and return are net of all commissions, the same as the rest of the report. On the bundled data the old calculation would have printed P/L 9,653.29 and Result 64.36%. The fixed code prints 4,932.33 and 32.88%, because 4,720.96 went to commissions. `finish()` also replaces the last point of the account value history with the equity after the final liquidation, so the final value and the history behind Sharpe and drawdown end on the same number.
 
 Annualized return now comes from one place, `Result.getAnnualizedReturn()`, which is return * 250 / days (simple, not compounded). Before, `BacktestMain` worked it out a second time using 251 days.
 
